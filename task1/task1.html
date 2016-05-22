@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+  <h1 id="heading">Countdown Timer</h1>
+  <h1 id="i1">Days</h1>
+  <h1 id="i2">Hour</h1>
+  <h1 id="i3">Minutes</h1>
+  <h1 id="i4">Seconds</h1>
+  <input type="text" id="days1">
+  <input type="text" id="hours1">
+  <input type="text" id="mins1">
+  <input type="text" id="secs1">
+  <br> 
+  <button onclick="load()" id="load">Load</button>
+<div id="timerdiv"> 
+  <div>
+    <span class="days"></span>
+    
+  </div>
+  <div>
+    <span class="hours"></span>
+    
+  </div>
+  <div>
+    <span class="min"></span>
+    
+  </div>
+  <div>
+    <span class="sec"></span> 
+    
+  </div>
+</div>
+
+<button onclick="start()" id="start">start</button>
+<button onclick="clearInterval(timeinterval)" id="stop">Stop</button>
+<button onclick="reset()" id="reset">Reset</button>
+<br>
+
+
+
+<script type="text/javascript">
+ var timeinterval;
+ 
+  function timeparser(a){
+    
+    var sec = Math.floor((a / 1000) % 60);
+  var min = Math.floor((a / 1000 / 60) % 60);
+  var hours = Math.floor((a / (1000 * 60 * 60)) % 24);
+  var days = Math.floor(a / (1000 * 60 * 60 * 24));
+  return {        
+    'total': a,
+    'days': days,
+    'hours': hours,
+    'min': min,
+    'sec': sec
+  };
+}
+
+  
+  function leftOutTime(endtime) {  
+  var ta = Date.parse(endtime) - Date.parse(new Date());
+  return timeparser(ta);
+}
+
+function runClock(id, endtime) {    runClock
+  var clock = document.getElementById(id);
+  var daysSpan = clock.querySelector('.days');
+  var hoursSpan = clock.querySelector('.hours');
+  var minSpan = clock.querySelector('.min');
+  var secSpan = clock.querySelector('.sec');
+  function updateClock() {
+        var t = leftOutTime(endtime);
+
+    daysSpan.innerHTML = t.days;
+    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+    minSpan.innerHTML = ('0' + t.min).slice(-2);
+    secSpan.innerHTML = ('0' + t.sec).slice(-2);
+
+    if (t.total <= 0) {
+      clearInterval(timeinterval);
+    }
+  }
+
+  updateClock();
+   timeinterval = setInterval(updateClock, 1000);
+
+  
+    
+}
+
+function start(){
+  var days1= document.getElementById("days1").value;
+ var hours1=document.getElementById("hours1").value;
+ var mins1=document.getElementById("mins1").value;
+ var secs1=document.getElementById("secs1").value;
+ var time = (days1*24*60*60*1000)+(hours1*60*60*1000)+(mins1*60*1000)+(secs1*1000);
+var deadline = new Date(Date.parse(new Date()) +  time);
+  runClock('timerdiv', deadline);
+ 
+  
+}
+
+function initial(id,endtime){
+  var clock = document.getElementById(id);
+  var daysSpan = clock.querySelector('.days');
+  var hoursSpan = clock.querySelector('.hours');
+  var minSpan = clock.querySelector('.min');
+  var secSpan = clock.querySelector('.sec');
+  var tata = Date.parse(endtime) - Date.parse(new Date());
+  var t = timeparser(tata);
+
+    daysSpan.innerHTML = t.days;
+    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+    minSpan.innerHTML = ('0' + t.min).slice(-2);
+    secSpan.innerHTML = ('0' + t.sec).slice(-2);
+
+}
+
+function reset(){
+  
+  clearInterval(timeinterval);
+  var days1= document.getElementById("days1").value;
+ var hours1=document.getElementById("hours1").value;
+ var mins1=document.getElementById("mins1").value;
+ var secs1=document.getElementById("secs1").value;
+ var time = (days1*24*60*60*1000)+(hours1*60*60*1000)+(mins1*60*1000)+(secs1*1000);
+  initial('timerdiv',new Date(Date.parse(new Date()) + time));
+
+
+}
+function load(){
+  var days1= document.getElementById("days1").value;
+ var hours1=document.getElementById("hours1").value;
+ var mins1=document.getElementById("mins1").value;
+ var secs1=document.getElementById("secs1").value;
+ var time = (days1*24*60*60*1000)+(hours1*60*60*1000)+(mins1*60*1000)+(secs1*1000);
+var deadline = new Date(Date.parse(new Date()) +  time);
+initial('timerdiv',deadline);
+
+
+}
+
+
+
+
+
+</script>
+
+</body>
+</html>
+
+	
