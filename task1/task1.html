@@ -27,16 +27,16 @@
   <div>
     <span class="min"></span>
     <h1 id="c3"> : </h1>
-  </div>
+  </div>                                 
   <div>
     <span class="sec"></span> 
     
   </div>
 </div>
 
-<button onclick="start()" id="start">start</button>
-<button onclick="clearInterval(timeinterval)" id="stop">Stop</button>
-<button onclick="reset()" id="reset">Reset</button>
+<button onclick="hey1()" id="start">start</button>          <!--hey functions are there to -->
+<button onclick="hey2()" id="stop">Stop</button>            <!--remove a technical glitch when the user-->
+<button onclick="hey3()" id="reset">Reset</button>          <!--clicks on a button twice-->
 <br>
 
 
@@ -90,8 +90,24 @@ function runTimer(id, endtime) {    //initiates and runs the timer
   
     
 }
+ 
+ function hey1(){
+  start();
+  document.getElementById("start").disabled= true;
+ 
+}
+function hey2(){
+  document.getElementById("start").disabled= false;
+  stop();
 
-function start(){                    // called when user clicks on start button
+}
+function hey3(){
+  document.getElementById("start").disabled= false;
+  reset();
+}
+
+function start(){  
+                   // called when user clicks on start button
   var days1= document.getElementById("days1").value;
   var hours1=document.getElementById("hours1").value;
   var mins1=document.getElementById("mins1").value;
@@ -101,6 +117,13 @@ function start(){                    // called when user clicks on start button
   runTimer('timerdiv', deadline);
  
   
+}
+
+function stop(){
+  clearInterval(timeinterval);
+  
+ 
+
 }
 
 function initial(id,endtime){       //used to display the initial values
@@ -128,6 +151,10 @@ function reset(){           //timer is reset to the user entered value when he c
   var secs1=document.getElementById("secs1").value;
   var time = (days1*24*60*60*1000)+(hours1*60*60*1000)+(mins1*60*1000)+(secs1*1000);
   initial('timerdiv',new Date(Date.parse(new Date()) + time));
+ /*document.getElementById("start").onclick = function(){
+    this.disabled= false;
+ };*/
+ 
 
 
 }

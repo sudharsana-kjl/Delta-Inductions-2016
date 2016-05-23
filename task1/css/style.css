@@ -1,6 +1,7 @@
 body{
   background-color: #ffff99;
   margin:3%;
+  overflow: hidden;
 }
 #heading {
   margin-top: 5%;
