@@ -112,9 +112,12 @@ function start(){
   var hours1=document.getElementById("hours1").value;
   var mins1=document.getElementById("mins1").value;
   var secs1=document.getElementById("secs1").value;
+  
   var time = (days1*24*60*60*1000)+(hours1*60*60*1000)+(mins1*60*1000)+(secs1*1000);
   var deadline = new Date(Date.parse(new Date()) +  time);
   runTimer('timerdiv', deadline);
+
+
  
   
 }
@@ -163,10 +166,14 @@ function load(){       // loads the user entered value into the timer
   var hours1=document.getElementById("hours1").value;
   var mins1=document.getElementById("mins1").value;
   var secs1=document.getElementById("secs1").value;
-  var time = (days1*24*60*60*1000)+(hours1*60*60*1000)+(mins1*60*1000)+(secs1*1000);
-  var deadline = new Date(Date.parse(new Date()) +  time);
-  initial('timerdiv',deadline);
+  if((days1>=0)&&(hours1>=0)&&(mins1>=0)&&(secs1>=0)){
 
+        var time = (days1*24*60*60*1000)+(hours1*60*60*1000)+(mins1*60*1000)+(secs1*1000);
+        var deadline = new Date(Date.parse(new Date()) +  time);
+        initial('timerdiv',deadline);
+}
+
+else alert("INVALID INPUTS");
 
 }
 
