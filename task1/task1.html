@@ -44,14 +44,14 @@
 <script type="text/javascript">
  var timeinterval;
  
-  function timeparser(a){      //splits the time passed in milliseconds into seconds,minutes,hours and days
+  function timeparser(aTime){      //splits the time passed in milliseconds into seconds,minutes,hours and days
     
-    var sec = Math.floor((a / 1000) % 60);
-  var min = Math.floor((a / 1000 / 60) % 60);
-  var hours = Math.floor((a / (1000 * 60 * 60)) % 24);
-  var days = Math.floor(a / (1000 * 60 * 60 * 24));
+    var sec = Math.floor((aTime / 1000) % 60);
+  var min = Math.floor((aTime / 1000 / 60) % 60);
+  var hours = Math.floor((aTime / (1000 * 60 * 60)) % 24);
+  var days = Math.floor(aTime / (1000 * 60 * 60 * 24));
   return {        
-    'total': a,
+    'total': aTime,
     'days': days,
     'hours': hours,
     'min': min,
@@ -69,15 +69,15 @@ function runTimer(id, endtime) {    //initiates and runs the timer
   var timer = document.getElementById(id);
   var spanDays = timer.querySelector('.days');
   var spanHours = timer.querySelector('.hours');
-  var spanMin= timer.querySelector('.min');
-  var spanSec = timer.querySelector('.sec');
+  var spanMins = timer.querySelector('.min');
+  var spanSecs = timer.querySelector('.sec');
   function updateTimer() {        //updates the timer after every call
         var t = leftOutTime(endtime);
 
     spanDays.innerHTML = t.days;
     spanHours.innerHTML = ('0' + t.hours).slice(-2);
-    spanMin.innerHTML = ('0' + t.min).slice(-2);
-    spanSec.innerHTML = ('0' + t.sec).slice(-2);
+    spanMins.innerHTML = ('0' + t.min).slice(-2);
+    spanSecs.innerHTML = ('0' + t.sec).slice(-2);
 
     if (t.total <= 0) {
       clearInterval(timeinterval);
@@ -107,15 +107,15 @@ function initial(id,endtime){       //used to display the initial values
   var timer = document.getElementById(id);
   var spanDays = timer.querySelector('.days');
   var spanHours = timer.querySelector('.hours');
-  var spanMin = timer.querySelector('.min');
-  var spanSec = timer.querySelector('.sec');
+  var spanMins = timer.querySelector('.min');
+  var spanSecs = timer.querySelector('.sec');
   var tata = Date.parse(endtime) - Date.parse(new Date());
   var t = timeparser(tata);
 
     spanDays.innerHTML = t.days;
     spanHours.innerHTML = ('0' + t.hours).slice(-2);
-    spanMin.innerHTML = ('0' + t.min).slice(-2);
-    spanSec.innerHTML = ('0' + t.sec).slice(-2);
+    spanMins.innerHTML = ('0' + t.min).slice(-2);
+    spanSecs.innerHTML = ('0' + t.sec).slice(-2);
 
 }
 
