@@ -15,29 +15,29 @@
   <input type="number" id="secs1">
   <br> 
   <button onclick="load()" id="load">Load</button>  
-<div id="timerdiv"> 
-  <div>
-    <span class="days"></span>
-    <h1 id="c1"> : </h1>
-  </div>
-  <div>
-    <span class="hours"></span>
-    <h1 id="c2"> : </h1>
-  </div>
-  <div>
-    <span class="min"></span>
-    <h1 id="c3"> : </h1>
-  </div>                                 
-  <div>
-    <span class="sec"></span> 
+  <div id="timerdiv"> 
+       <div>
+          <span class="days"></span>
+          <h1 id="c1"> : </h1>
+       </div>
+       <div>
+          <span class="hours"></span>
+          <h1 id="c2"> : </h1>
+       </div>
+       <div>
+          <span class="min"></span>
+          <h1 id="c3"> : </h1>
+       </div>                                 
+       <div>
+          <span class="sec"></span> 
     
+       </div>
   </div>
-</div>
 
-<button onclick="hey1()" id="start">start</button>          <!--hey functions are there to -->
-<button onclick="hey2()" id="stop">Stop</button>            <!--remove a technical glitch when the user-->
-<button onclick="hey3()" id="reset">Reset</button>          <!--clicks on a button twice-->
-<br>
+  <button onclick="start1()" id="start">start</button>          <!--These functions are there to -->
+  <button onclick="stop1()" id="stop">Stop</button>            <!--remove a technical glitch when the user-->
+  <button onclick="reset1()" id="reset">Reset</button>          <!--clicks on a button twice-->
+  <br>
 
 
 
@@ -47,64 +47,62 @@
   function timeparser(aTime){      //splits the time passed in milliseconds into seconds,minutes,hours and days
     
     var sec = Math.floor((aTime / 1000) % 60);
-  var min = Math.floor((aTime / 1000 / 60) % 60);
-  var hours = Math.floor((aTime / (1000 * 60 * 60)) % 24);
-  var days = Math.floor(aTime / (1000 * 60 * 60 * 24));
-  return {        
+    var min = Math.floor((aTime / 1000 / 60) % 60);
+    var hours = Math.floor((aTime / (1000 * 60 * 60)) % 24);
+    var days = Math.floor(aTime / (1000 * 60 * 60 * 24));
+    return {        
     'total': aTime,
     'days': days,
     'hours': hours,
     'min': min,
     'sec': sec
-  };
-}
+   };
+ }
 
   
   function leftOutTime(endtime) {   //calculates the time left
-  var ta = Date.parse(endtime) - Date.parse(new Date());
-  return timeparser(ta);
-}
-
-function runTimer(id, endtime) {    //initiates and runs the timer
-  var timer = document.getElementById(id);
-  var spanDays = timer.querySelector('.days');
-  var spanHours = timer.querySelector('.hours');
-  var spanMins = timer.querySelector('.min');
-  var spanSecs = timer.querySelector('.sec');
-  function updateTimer() {        //updates the timer after every call
-        var t = leftOutTime(endtime);
-
-    spanDays.innerHTML = t.days;
-    spanHours.innerHTML = ('0' + t.hours).slice(-2);
-    spanMins.innerHTML = ('0' + t.min).slice(-2);
-    spanSecs.innerHTML = ('0' + t.sec).slice(-2);
-
-    if (t.total <= 0) {
-      clearInterval(timeinterval);
-    }
+    var ta = Date.parse(endtime) - Date.parse(new Date());
+    return timeparser(ta);
   }
 
-  updateTimer();
-   timeinterval = setInterval(updateTimer, 1000);  // one second is set as the time interval
+  function runTimer(id, endtime) {    //initiates and runs the timer
+    var timer = document.getElementById(id);
+    var spanDays = timer.querySelector('.days');
+    var spanHours = timer.querySelector('.hours');
+    var spanMins = timer.querySelector('.min');
+    var spanSecs = timer.querySelector('.sec');
+    function updateTimer() {        //updates the timer after every call
+        var t = leftOutTime(endtime);
 
-  
-    
-}
+        spanDays.innerHTML = t.days;
+        spanHours.innerHTML = ('0' + t.hours).slice(-2);
+        spanMins.innerHTML = ('0' + t.min).slice(-2);
+        spanSecs.innerHTML = ('0' + t.sec).slice(-2);
+
+        if (t.total <= 0) {
+           clearInterval(timeinterval);
+         }
+     }
+
+  updateTimer();
+  timeinterval = setInterval(updateTimer, 1000);  // one second is set as the time interval
+   
+  } 
  
- function hey1(){
+ function start1(){
   start();
   document.getElementById("start").disabled= true;
- 
-}
-function hey2(){
+  }
+
+ function stop1(){
   document.getElementById("start").disabled= false;
   stop();
+ }
 
-}
-function hey3(){
+ function reset1(){
   document.getElementById("start").disabled= false;
   reset();
-}
+ }
 
 function start(){  
                    // called when user clicks on start button
@@ -116,18 +114,13 @@ function start(){
   var time = (days1*24*60*60*1000)+(hours1*60*60*1000)+(mins1*60*1000)+(secs1*1000);
   var deadline = new Date(Date.parse(new Date()) +  time);
   runTimer('timerdiv', deadline);
-
-
- 
   
-}
+ }
 
 function stop(){
   clearInterval(timeinterval);
-  
- 
-
-}
+   
+ }
 
 function initial(id,endtime){       //used to display the initial values
   var timer = document.getElementById(id);
@@ -154,12 +147,8 @@ function reset(){           //timer is reset to the user entered value when he c
   var secs1=document.getElementById("secs1").value;
   var time = (days1*24*60*60*1000)+(hours1*60*60*1000)+(mins1*60*1000)+(secs1*1000);
   initial('timerdiv',new Date(Date.parse(new Date()) + time));
- /*document.getElementById("start").onclick = function(){
-    this.disabled= false;
- };*/
+
  
-
-
 }
 function load(){       // loads the user entered value into the timer
   var days1= document.getElementById("days1").value;
@@ -171,9 +160,9 @@ function load(){       // loads the user entered value into the timer
         var time = (days1*24*60*60*1000)+(hours1*60*60*1000)+(mins1*60*1000)+(secs1*1000);
         var deadline = new Date(Date.parse(new Date()) +  time);
         initial('timerdiv',deadline);
-}
+  }
 
-else alert("INVALID INPUTS");
+   else alert("INVALID INPUTS");
 
 }
 
