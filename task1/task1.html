@@ -73,7 +73,6 @@
     var spanSecs = timer.querySelector('.sec');
     function updateTimer() {        //updates the timer after every call
         var t = leftOutTime(endtime);
-
         spanDays.innerHTML = t.days;
         spanHours.innerHTML = ('0' + t.hours).slice(-2);
         spanMins.innerHTML = ('0' + t.min).slice(-2);
