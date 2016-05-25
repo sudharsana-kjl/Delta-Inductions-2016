@@ -104,8 +104,7 @@
   reset();
  }
 
-function start(){  
-                   // called when user clicks on start button
+function start(){  // called when user clicks on start button
   var days1= document.getElementById("days1").value;
   var hours1=document.getElementById("hours1").value;
   var mins1=document.getElementById("mins1").value;
@@ -122,7 +121,7 @@ function stop(){
    
  }
 
-function initial(id,endtime){       //used to display the initial values
+function initial(id,endtime){       //used to display the initial values in the timer
   var timer = document.getElementById(id);
   var spanDays = timer.querySelector('.days');
   var spanHours = timer.querySelector('.hours');
@@ -150,7 +149,7 @@ function reset(){           //timer is reset to the user entered value when he c
 
  
 }
-function load(){       // loads the user entered value into the timer
+function load(){       // gets the user entered value and calculates the deadline and calls initial
   var days1= document.getElementById("days1").value;
   var hours1=document.getElementById("hours1").value;
   var mins1=document.getElementById("mins1").value;
