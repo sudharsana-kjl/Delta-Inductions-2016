@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+  <h1 id="heading">Countdown Timer</h1>
+  <h1 id="i1">Date</h1>
+  <input type="date" id="myDate" value="2016-05-27">
+  
+  <br> 
+  <button onclick="load()" id="load">Load</button>
+  <h1 id="i1">Days</h1>
+  <h1 id="i2">Hour</h1>
+  <h1 id="i3">Minutes</h1>
+  <h1 id="i4">Seconds</h1>  
+  <div id="timerdiv"> 
+       <div>
+          <span class="days"></span>
+          <h1 id="c1"> : </h1>
+       </div>
+       <div>
+          <span class="hours"></span>
+          <h1 id="c2"> : </h1>
+       </div>
+       <div>
+          <span class="min"></span>
+          <h1 id="c3"> : </h1>
+       </div>                                 
+       <div>
+          <span class="sec"></span> 
+    
+       </div>
+  </div>
+
+  <button onclick="start1()" id="start">start</button>          <!--These functions are there to -->
+  <button onclick="stop1()" id="stop">Stop</button> 
+  <button onclick="resume()" id="resume">Resume</button>           <!--remove a technical glitch when the user-->
+  <button onclick="reset1()" id="reset">Reset</button>          <!--clicks on a button twice-->
+  <br>
+
+
+
+<script type="text/javascript">
+ var timeinterval;
+ var t;
+ var fixed;
+ var dd;
+ var m;
+ var hr;
+ var s;
+ 
+  function timeparser(aTime){      //splits the time passed in milliseconds into seconds,minutes,hours and days
+    
+    var sec = Math.floor((aTime / 1000) % 60);
+    var min = Math.floor((aTime / 1000 / 60) % 60);
+    var hours = Math.floor((aTime / (1000 * 60 * 60)) % 24);
+    var days = Math.floor(aTime / (1000 * 60 * 60 * 24));
+    return {        
+    'total': aTime,
+    'days': days,
+    'hours': hours,
+    'min': min,
+    'sec': sec
+   };
+ }
+
+  
+  function leftOutTime(endtime) {
+     //calculates the time left
+    var ta = endtime - Date.parse(new Date());
+    return timeparser(ta);
+  }
+
+  function runTimer(id, endtime) {
+        //initiates and runs the timer
+    var timer = document.getElementById(id);
+    var spanDays = timer.querySelector('.days');
+    var spanHours = timer.querySelector('.hours');
+    var spanMins = timer.querySelector('.min');
+    var spanSecs = timer.querySelector('.sec');
+    function updateTimer() { 
+                //updates the timer after every call
+         t = leftOutTime(endtime);
+        
+        spanDays.innerHTML = t.days;
+        spanHours.innerHTML = ('0' + t.hours).slice(-2);
+        spanMins.innerHTML = ('0' + t.min).slice(-2);
+        spanSecs.innerHTML = ('0' + t.sec).slice(-2);
+
+        if (t.total <= 0) {
+           clearInterval(timeinterval);
+         }
+     }
+
+  updateTimer();
+  timeinterval = setInterval(updateTimer, 1000);  // one second is set as the time interval
+   
+  } 
+ 
+ function start1(){
+  start();
+  document.getElementById("start").disabled= true;
+  }
+
+ function stop1(){
+  document.getElementById("start").disabled= false;
+  stop();
+ }
+
+ function reset1(){
+  document.getElementById("start").disabled= false;
+  reset();
+ }
+
+function start(){  
+                   // called when user clicks on start button
+  
+  var deadline = fixed + Date.parse(new Date());
+  
+  
+  
+
+  runTimer('timerdiv', deadline);
+  
+ }
+
+function stop(){
+
+   dd=t.days;
+   hr=t.hours;
+   m=t.min;
+   s=t.sec;
+
+
+  clearInterval(timeinterval);
+   
+ }
+ function resume(){
+
+  var time1= (dd*24*60*60*1000)+(hr*60*60*1000)+(m*60*1000)+(s*1000);
+  var ded = new Date(Date.parse(new Date())+ time1);
+  runTimer('timerdiv',ded);
+ }
+
+function initial(id,endtime){       //used to display the initial values
+  var timer = document.getElementById(id);
+  var spanDays = timer.querySelector('.days');
+  var spanHours = timer.querySelector('.hours');
+  var spanMins = timer.querySelector('.min');
+  var spanSecs = timer.querySelector('.sec');
+  var tata = endtime - Date.parse(new Date());
+  var t = timeparser(tata);
+
+    spanDays.innerHTML = t.days;
+    spanHours.innerHTML = ('0' + t.hours).slice(-2);
+    spanMins.innerHTML = ('0' + t.min).slice(-2);
+    spanSecs.innerHTML = ('0' + t.sec).slice(-2);
+
+}
+
+function reset(){           //timer is reset to the user entered value when he clicks on reset button
+  
+  clearInterval(timeinterval);
+  var x = fixed + Date.parse(new Date());
+   
+    initial("timerdiv",x);
+
+ 
+}
+function load(){       // loads the user entered value into the timer
+  
+   var x = Date.parse(document.getElementById("myDate").value);
+   fixed = x - Date.parse(new Date());
+   
+    initial("timerdiv",x);
+
+}
+
+
+
+
+
+</script>
+
+</body>
+</html>
+
+  
