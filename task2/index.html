@@ -130,7 +130,7 @@ function doKeyDown(evt){
     
 if(evt.keyCode==32) {
   
-if (myGamePiece.y - dy > 0){
+if (myGamePiece.y - dy == 140){
 myGamePiece.y -= dy;
 
 setTimeout(function(){jump();},1500);
