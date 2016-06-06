@@ -17,6 +17,8 @@ canvas {
 </style>
 </head>
 <body onload="startGame()">
+    <button id="pause" onclick="pause()">Pause</button>
+    <button id="resume" onclick="resume()">Resume</button>
     <div id="gameover">Game Over!</div>
 <script>
 
@@ -26,6 +28,7 @@ var myScore;
 var c=0;
 var mySound1;
 var mySound2;
+var interval;
 //document.getElementById("myDIV").style.WebkitAnimation = "mynewmove 4s 2";
 //document.getElementById("myDIV").style.animation = "mynewmove 4s 2";
 function updateGameArea() {
@@ -75,7 +78,7 @@ var myGameArea = {
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
 
-        this.interval = setInterval(function(){updateGameArea();},20);
+        interval = setInterval(function(){updateGameArea();},20);
 
         
     },
@@ -83,8 +86,16 @@ var myGameArea = {
         this.context.clearRect(0,0,this.canvas.width,this.canvas.height);
     },
     stop : function() {
-        clearInterval(this.interval);
+        
+        clearInterval(interval);
+        //clearInterval(inter);
         gover();
+    },
+    pauseGame : function() {
+        clearInterval(interval);
+    },
+    resumeGame : function() {
+        interval = setInterval(function(){updateGameArea();},20);
     }
 }
 function gover (){
@@ -187,7 +198,15 @@ if(evt.keyCode==32) {
       
     }
 }*/
+function pause(){
+ myGameArea.pauseGame();
+ document.getElementById("resume").disabled = false;
 
+}
+function resume(){
+ myGameArea.resumeGame();
+ document.getElementById("resume").disabled = true;
+}
  function sound(src) {
     this.sound = document.createElement("audio");
     this.sound.src = src;
