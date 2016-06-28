@@ -43,15 +43,16 @@ if(isset($_POST['btn-login']))
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Login</title>
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link type="text/css" rel="stylesheet" href="materialize.min.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="style1.css">
 </head>
 <body>
 <center>
-<div id="login-form">
-<form method="post">
+<div id="login-form" style="width:40%;">
+<form method="post" class="col s12">
 <table align="center" width="30%" border="0">
 <tr>
-<td><input type="text" name="email" placeholder="Your Email" required /></td>
+<td><input  type="text" name="email" placeholder="Your Email" required /></td>
 </tr>
 <tr>
 <td><input type="password" name="pass" placeholder="Your Password" required /></td>

@@ -19,17 +19,22 @@ $userRow=mysqli_fetch_array($res);
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Welcome - <?php echo $userRow['username']; ?></title>
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link type="text/css" rel="stylesheet" href="materialize.min.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="style1.css">
+
 </head>
 <body>
-<div id="header">
+    <nav>
+<div class = "teal nav-wrapper">
 	
-    <div id="right">
-    	<div id="content">
-        	<a href="logout.php?logout">Sign Out</a>
-        </div>
-    </div>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="logout.php?logout">Log out</a></li>
+        
+      </ul>
+        	
+        
 </div>
+</nav>
 
 <div id="body">
 	

@@ -74,7 +74,7 @@ if(isset($_POST['btn-signup']))
 
 		
 		//if(mysql_query("INSERT INTO users(username,email,password,file) VALUES('$uname','$email','$upass','$final_file')"))
-          if($res)		
+          /*if($res)		
 		{
 			?>
 			<script>alert('successfully registered ');</script>
@@ -85,7 +85,7 @@ if(isset($_POST['btn-signup']))
 			?>
 			<script>alert('error while registering you...');</script>
 			<?php
-		}	
+		}*/		
 	}
 	else{
 			?>
@@ -99,13 +99,14 @@ if(isset($_POST['btn-signup']))
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Coding Cage - Login & Registration System</title>
-<link rel="stylesheet" href="style.css" type="text/css" />
+<title>Register</title>
+<link type="text/css" rel="stylesheet" href="materialize.min.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="style1.css">
 
 </head>
 <body>
 <center>
-<div id="login-form">
+<div id="login-form" style="width:40%;">
 <form method="post" enctype="multipart/form-data" >
 <table align="center" width="30%" border="0">
 <tr>
