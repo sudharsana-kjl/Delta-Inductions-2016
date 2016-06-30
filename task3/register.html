@@ -1,0 +1,109 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Register</title>
+<link type="text/css" rel="stylesheet" href="materialize.min.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="style1.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+</head>
+<body>
+<center>
+<div id="login-form">
+<form class="form" >
+<table align="center" width="30%" border="0">
+<tr>
+<td><input type="text" id="uname" name="uname" placeholder="User Name" required /></td>
+</tr>
+<tr>
+<td><input type="email" id="email" name="email" placeholder="Your Email" required /></td>
+</tr>
+<tr>
+<td><input type="password" id="pass" name="pass" placeholder="Your Password" required /></td>
+</tr>
+<tr>
+	<td><input type="file" name="file" id="file" required/></td>
+</tr>
+
+<tr>
+<td><button type="submit" onclick="myFunction(event)" >Sign Me Up</button></td>
+</tr>
+<tr>
+<td><a href="index.php">Sign In Here</a></td>
+</tr>
+</table>
+</form>
+
+</div>
+</center>
+<script>
+function myFunction(event) {
+	event.preventDefault();
+	//var hr = new XMLHttpRequest();
+	//var url = "register.php";
+var name = document.getElementById("uname").value;
+var email = document.getElementById("email").value;
+var password = document.getElementById("pass").value;
+var file = document.getElementById("file").value;
+/*file = file.slice(12);
+console.log(file);*/
+var formElement = document.querySelector("form");
+var request = new XMLHttpRequest();
+if (name == '' || email == '' || password == '' || file == '' ) {
+alert("Please Fill All Fields");
+} else {
+      request.open("POST", "register.php");
+      request.send(new FormData(formElement));
+      request.onreadystatechange = function(){
+		if(request.readyState == 4 && request.status ==200){
+			var return_data = request.responseText;
+			document.getElementById("status").innerHTML = return_data;
+		}
+	}
+}
+
+//var formdata = new FormData();
+// Returns successful data submission message when the entered information is stored in database.
+//formdata.append('uname',name);
+//formdata.append('email',email);
+//formdata.append('pass',password);
+
+/*var dataString = 'uname=' + name + '&email=' + email + '&pass=' + password + '&file=' + file ;
+
+
+if (name == '' || email == '' || password == '' || file == '' ) {
+alert("Please Fill All Fields");
+} else {
+	hr.open("POST",url,true);
+	hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	hr.onreadystatechange = function(){
+		if(hr.readyState == 4 && hr.status ==200){
+			var return_data = hr.responseText;
+			document.getElementById("status").innerHTML = return_data;
+		}
+	}
+	hr.send(dataString);
+	document.getElementById("status").innerHTML = "processsing..";
+// AJAX code to submit form.
+/*$.ajax({
+type: "POST",
+url: "register.php",
+data: dataString,
+cache: false,
+success: function(data) {
+
+alert("success");
+
+}
+
+});
+}
+return false;
+}*/
+//}
+}
+</script>
+<h3><div id="status"></div></h3>
+</body>
+</html>

@@ -48,7 +48,7 @@ if(isset($_POST['btn-login']))
 </head>
 <body>
 <center>
-<div id="login-form" style="width:40%;">
+<div id="login-form">
 <form method="post" class="col s12">
 <table align="center" width="30%" border="0">
 <tr>
@@ -61,7 +61,7 @@ if(isset($_POST['btn-login']))
 <td><button type="submit" name="btn-login">Sign In</button></td>
 </tr>
 <tr>
-<td><a href="register.php">Sign Up Here</a></td>
+<td><a href="register.html">Sign Up Here</a></td>
 </tr>
 </table>
 </form>
